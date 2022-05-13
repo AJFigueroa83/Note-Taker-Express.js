@@ -1,0 +1,23 @@
+{
+  "name": "note-taker-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AJFigueroa83/Note-Taker-Express.js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AJFigueroa83/Note-Taker-Express.js/issues"
+  },
+  "homepage": "https://github.com/AJFigueroa83/Note-Taker-Express.js#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
