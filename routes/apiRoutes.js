@@ -1,27 +1,18 @@
-const express = require('express');
-const uuid = require('uuid');
-const router = express.Router();
-const saveData = require('../db/saveData');
+const router = require('express').Router();
+const { readFromFile, readAndAppend, writeToFile } = require('../helpers/fsUtils');
+const { v4: uuidv4 } = require('uuid');
 
-router.get('/notes', function (req, res) {
-    saveData
-        .retrieveNotes()
-        .then(notes => res.json(notes))
-        .catch(err => res.status(400).json(err));
+
+router.get('/notes', (req, res) => {
+    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
 router.post('/notes', (req, res) => {
-    saveData
-        .addNote(req.body)
-        .then((note) => res.json(note))
-        .catch(err => res.status(400).json(err));
+    const newNote = req.body;
+    newNote.id = uuidv4();
+    readAndAppend(newNote, './db/db.json');
+    res.json(newNote)
 });
 
-router.delete('/notes:id', function (req, res) {
-    saveData
-        .deleteNote(req.params.id)
-        .then(() => res.json({ ok: true }))
-        .catch(err => res.status(500).json(err));
-});
 
 module.exports = router;
